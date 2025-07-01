@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tribe Chronicles: The Great Henna Escape</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .story-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .title {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .chapter {
+            background: white;
+            border-radius: 20px;
+            margin: 30px 0;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        .chapter:nth-child(even) {
+            animation-delay: 0.3s;
+        }
+
+        .chapter:nth-child(odd) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chapter-header {
+            font-size: 1.8rem;
+            color: #e91e63;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .chapter-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+        }
+
+        .phone-message {
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 18px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: scale(0);
+            animation: popIn 0.5s ease-out 1s forwards;
+        }
+
+        @keyframes popIn {
+            to { transform: scale(1); }
+        }
+
+        .phone-message::before {
+            content: '📱';
+            position: absolute;
+            left: -10px;
+            top: -5px;
+            font-size: 1.5rem;
+        }
+
+        .reaction-box {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .thinking-bubble {
+            background: #f39c12;
+            color: white;
+            padding: 15px;
+            border-radius: 20px;
+            margin: 15px 0;
+            position: relative;
+            font-style: italic;
+        }
+
+        .thinking-bubble::before {
+            content: '💭';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+        }
+
+        .countdown {
+            font-size: 3rem;
+            text-align: center;
+            color: #e74c3c;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .interactive-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .interactive-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .emoji-rain {
+            position: fixed;
+            top: -50px;
+            font-size: 2rem;
+            z-index: 1000;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .verdict {
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 30px 0;
+        }
+
+        .floating-icons {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .icon-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .icon-2 { top: 20%; right: 15%; animation-delay: 2s; }
+        .icon-3 { bottom: 30%; left: 20%; animation-delay: 4s; }
+        .icon-4 { bottom: 10%; right: 10%; animation-delay: 1s; }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .story-container {
+                padding: 15px;
+            }
+            
+            .chapter {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            
+            .chapter-header {
+                font-size: 1.5rem;
+            }
+        }
+
+        .dramatic-pause {
+            text-align: center;
+            font-size: 2rem;
+            margin: 30px 0;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-icons icon-1">💃</div>
+    <div class="floating-icons icon-2">👯‍♀️</div>
+    <div class="floating-icons icon-3">💅</div>
+    <div class="floating-icons icon-4">🎉</div>
+
+    <div class="story-container">
+        <h1 class="title">The Tribe Chronicles</h1>
+        <p class="subtitle">Episode 47: The Great Henna Escape</p>
+
+        <div class="chapter">
+            <h2 class="chapter-header">Chapter 1: The Perfect Plan</h2>
+            <p>Once upon a time, in the bustling group chat of Birmingham, there lived a tribe of fabulous girls. Arooza was getting married! 🎊 The squad had planned the PERFECT Sunday bridal shower - henna, food, gossip, and enough laughter to power the entire West Midlands.</p>
+            
+            <div class="thinking-bubble">
+                "This is going to be EPIC! We've got the venue, the playlist, the matching outfits... what could possibly go wrong?" 🤔
+            </div>
+            
+            <p>The group chat was buzzing with excitement. Plans were SET. Expectations were HIGH. The vibe was IMMACULATE.</p>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-header">Chapter 2: The Plot Twist</h2>
+            <p>BUT THEN... *dramatic music* 🎭</p>
+            
+            <div class="dramatic-pause">...</div>
+            
+            <div class="phone-message">
+                <strong>Henna Nabi:</strong> "Heyy girlsss... so like... I can't really make the whole day tomorrow... I've got mandatory volunteer training at Birmingham Central Mosque... sorry babes! 🥺"
+            </div>
+            
+            <div class="reaction-box">
+                <h3>RECORD SCRATCH! 📀</h3>
+                <p>*Freeze frame* *Everyone stops mid-scroll*</p>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-header">Chapter 3: The Great Contradiction</h2>
+            <p>Hold up, hold up, HOLD UP! 🛑</p>
+            
+            <div class="thinking-bubble">
+                "Did she just say... MANDATORY... VOLUNTEER?" 🤨
+            </div>
+            
+            <p>Our brave tribe members scratched their heads in collective confusion. Since when did volunteering become mandatory? Isn't that like saying "compulsory optional" or "required choice"? 🤯</p>
+            
+            <button class="interactive-button" onclick="showLogic()">Click for Logic Check!</button>
+            <div id="logic-result" style="display: none; margin-top: 20px; padding: 15px; background: #f39c12; color: white; border-radius: 10px;">
+                <strong>LOGIC.EXE HAS STOPPED WORKING 💻❌</strong><br>
+                Error 404: Sense Not Found
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-header">Chapter 4: The Timing Scandal</h2>
+            <p>But wait... there's MORE! 📞</p>
+            
+            <div class="countdown" id="countdown">🕐</div>
+            <p style="text-align: center; margin: 20px 0;"><strong>Time until event: TOMORROW!</strong></p>
+            
+            <div class="reaction-box">
+                <h3>Last Minute Lucy has entered the chat! 👋</h3>
+                <p>Because nothing says "I'm committed to this friendship" quite like announcing you can't come THE DAY BEFORE the event! 📅💀</p>
+            </div>
+            
+            <div class="thinking-bubble">
+                "Ma'am, did you just discover you had this 'mandatory volunteering' today? Did they send you a WhatsApp message from the mosque saying 'surprise! You're needed tomorrow!'?" 📱
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-header">Chapter 5: The Tribe's Verdict</h2>
+            
+            <button class="interactive-button" onclick="revealVerdict()">What Does The Tribe Think?</button>
+            
+            <div id="verdict" style="display: none;">
+                <div class="verdict">
+                    <h3>🎯 GUILTY AS CHARGED! 🎯</h3>
+                    <p><strong>Crime:</strong> First-degree excuse making with intent to avoid social obligations</p>
+                    <p><strong>Evidence:</strong> Contradictory terminology and suspicious timing</p>
+                    <p><strong>Sentence:</strong> Bringing double the snacks to the NEXT event! 🍰🍪</p>
+                </div>
+                
+                <div class="reaction-box">
+                    <h3>The Tribe Says:</h3>
+                    <p>"Henna, bestie, we love you BUT... 👀"</p>
+                    <p>"What are you ACTUALLY playing at, girl?! 🤔"</p>
+                    <p>"Your excuse game needs WORK! 💪"</p>
+                    <p>"We see you! 👁️👁️"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2 class="chapter-header">Epilogue: The Moral of the Story</h2>
+            <p>And so, dear readers, our tribe learned an important lesson about the mysterious world of "mandatory volunteering" and last-minute revelations. 📚</p>
+            
+            <div class="thinking-bubble">
+                "Next time, maybe just say 'I can't come' instead of creating a philosophical paradox!" 🤷‍♀️
+            </div>
+            
+            <p style="text-align: center; margin: 30px 0; font-size: 1.2rem; color: #e91e63;">
+                <strong>Remember: The group chat sees ALL! 👀💬</strong>
+            </p>
+            
+            <button class="interactive-button" onclick="celebrateEnding()">The End! 🎭</button>
+        </div>
+    </div>
+
+    <script>
+        function showLogic() {
+            document.getElementById('logic-result').style.display = 'block';
+            createEmojiRain(['🤔', '❓', '🤯', '💭']);
+        }
+
+        function revealVerdict() {
+            document.getElementById('verdict').style.display = 'block';
+            createEmojiRain(['⚖️', '👩‍⚖️', '🎯', '📝']);
+        }
+
+        function celebrateEnding() {
+            createEmojiRain(['🎉', '👯‍♀️', '💃', '🎊', '✨']);
+            setTimeout(() => {
+                alert("Thanks for reading The Tribe Chronicles! 📖✨\n\nRemember: Good friends call out suspicious excuses with love! 💕");
+            }, 1000);
+        }
+
+        function createEmojiRain(emojis) {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const emoji = document.createElement('div');
+                    emoji.className = 'emoji-rain';
+                    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    emoji.style.left = Math.random() * 100 + 'vw';
+                    emoji.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    document.body.appendChild(emoji);
+                    
+                    setTimeout(() => {
+                        emoji.remove();
+                    }, 5000);
+                }, i * 200);
+            }
+        }
+
+        // Auto-update countdown
+        function updateCountdown() {
+            const countdownEl = document.getElementById('countdown');
+            const times = ['🕐', '🕑', '🕒', '🕓', '🕔', '🕕'];
+            let index = 0;
+            
+            setInterval(() => {
+                countdownEl.textContent = times[index];
+                index = (index + 1) % times.length;
+            }, 1000);
+        }
+
+        // Initialize when page loads
+        window.onload = function() {
+            updateCountdown();
+            
+            // Add some random floating emojis periodically
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    createEmojiRain(['💅', '☕', '📱']);
+                }
+            }, 5000);
+        };
+    </script>
+</body>
+</html>
